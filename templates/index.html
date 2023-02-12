@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>String generator</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      h1 {
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 20px;
+        margin-bottom: 40px;
+      }
+      #generated-string {
+        font-size: 24px;
+        transition: all 0s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bortförklaringsgenerator</h1>
+    <button id="generate-button">Generera</button>
+    <p id="generated-string">{{ default_string }}</p>
+
+    <script>
+      const generateButton = document.getElementById("generate-button");
+      const generatedString = document.getElementById("generated-string");
+
+      generateButton.addEventListener("click", function() {
+        fetch("/generate")
+          .then(response => response.text())
+          .then(text => {
+            generatedString.innerHTML = text;
+          });
+      });
+    </script>
+  </body>
+</html>
